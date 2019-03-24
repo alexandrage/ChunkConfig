@@ -25,7 +25,7 @@ public class BlockTag {
 		int tmpx2 = tmpx << 4;
 		int tmpz = z >> 4;
 		int tmpz2 = tmpz << 4;
-		return (x - tmpx2) + "." + y + "." + (z - tmpz2);
+		return new String(new char[] { (char) (x - tmpx2), (char) y, (char) (z - tmpz2) });
 	}
 
 	public void add(Location loc, String player) {
@@ -71,7 +71,11 @@ public class BlockTag {
 		}
 		File file = new File(folder, name + ".dat");
 		try {
-			CompressedStreamTools.writeCompressed(nbt, new FileOutputStream(file));
+			if (locs.size() != 0) {
+				CompressedStreamTools.writeCompressed(nbt, new FileOutputStream(file));
+			} else {
+				file.delete();
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
