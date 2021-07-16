@@ -21,11 +21,7 @@ public class BlockTag {
 		int x = loc.getBlockX();
 		int y = loc.getBlockY();
 		int z = loc.getBlockZ();
-		int tmpx = x >> 4;
-		int tmpx2 = tmpx << 4;
-		int tmpz = z >> 4;
-		int tmpz2 = tmpz << 4;
-		return new String(new char[] { (char) (x - tmpx2), (char) y, (char) (z - tmpz2) });
+		return new String(new char[] { (char) (x & 15), (char) y, (char) (z & 15) });
 	}
 
 	public void add(Location loc, String player) {
